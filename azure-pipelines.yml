@@ -22,7 +22,7 @@ steps:
 #    restoreSolution: '$(solution)'
 
 
-    # .NET Core
+  # .NET Core
 # Restore NuGet packages.
 - task: DotNetCoreCLI@2
   inputs:
@@ -37,7 +37,13 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: VSTest@2
+- task: DotNetCoreCLI@2
   inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    command: test
+    projects: '**/*Tests/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
+
+#- task: VSTest@2
+#  inputs:
+#    platform: '$(buildPlatform)'
+#    configuration: '$(buildConfiguration)'
